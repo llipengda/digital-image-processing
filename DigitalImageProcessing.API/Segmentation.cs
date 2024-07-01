@@ -58,7 +58,7 @@ public static class Segmentation
             return result;
         }
 
-        throw new NotImplementedException();
+        throw new InvalidOperationException();
     }
 
     public static Mat EdgeDetection(Mat image, EdgeDetectionAlgorithm algorithm)
@@ -221,7 +221,7 @@ public static class Segmentation
             return result;
         }
 
-        throw new NotImplementedException();
+        throw new InvalidOperationException();
     }
 }
 
