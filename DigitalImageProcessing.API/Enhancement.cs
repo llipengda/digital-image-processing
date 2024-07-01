@@ -157,12 +157,11 @@ public static class Enhancement
 
             g.Add(jMin);
         }
-
-        // 应用映射表
+        
         Mat result = new(image.Size(), MatType.CV_8U);
-        for (int i = 0; i < image.Rows; i++)
+        for (var i = 0; i < image.Rows; i++)
         {
-            for (int j = 0; j < image.Cols; j++)
+            for (var j = 0; j < image.Cols; j++)
             {
                 result.Set(i, j, (byte)g[image.At<byte>(i, j)]);
             }

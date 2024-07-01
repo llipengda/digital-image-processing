@@ -159,11 +159,6 @@ public static class Calculate
         return newImage;
     }
 
-    /// <summary>
-    /// 离散傅里叶变换
-    /// </summary>
-    /// <param name="image"></param>
-    /// <returns></returns>
     public static Mat Dft(Mat image)
     {
         var gray = Basic.ToGray(image);
@@ -185,8 +180,20 @@ public static class Calculate
         Cv2.Merge(planes, complexI);
 
         Cv2.Dft(complexI, complexI);
+        
+        return complexI;
+    }
 
-        Cv2.Split(complexI, out planes);
+    /// <summary>
+    /// 离散傅里叶变换
+    /// </summary>
+    /// <param name="image"></param>
+    /// <returns></returns>
+    public static Mat DftImage(Mat image)
+    {
+        var complexI = Dft(image);
+        
+        Cv2.Split(complexI, out var planes);
 
         Cv2.Magnitude(planes[0], planes[1], planes[0]);
 
@@ -195,29 +202,55 @@ public static class Calculate
         magI += Scalar.All(1);
         Cv2.Log(magI, magI);
 
-        magI = new Mat(magI, new Rect(0, 0, magI.Cols & -2, magI.Rows & -2));
-
-        var cx = magI.Cols / 2;
-        var cy = magI.Rows / 2;
-
-        var q0 = new Mat(magI, new Rect(0, 0, cx, cy));
-        var q1 = new Mat(magI, new Rect(cx, 0, cx, cy));
-        var q2 = new Mat(magI, new Rect(0, cy, cx, cy));
-        var q3 = new Mat(magI, new Rect(cx, cy, cx, cy));
-
-        var tmp = new Mat();
-
-        q0.CopyTo(tmp);
-        q3.CopyTo(q0);
-        tmp.CopyTo(q3);
-
-        q1.CopyTo(tmp);
-        q2.CopyTo(q1);
-        tmp.CopyTo(q2);
+        magI = DftShift(magI);
 
         Cv2.Normalize(magI, magI, 0, 1, NormTypes.MinMax);
 
         return magI;
+    }
+
+    public static Mat DftShift(Mat image)
+    {
+        var planes = image.Split();
+
+        for (var i = 0; i < 2; i++)
+        {
+            image = planes[i];
+            
+            image = new Mat(image, new Rect(0, 0, image.Cols & -2, image.Rows & -2));
+
+            var cx = image.Cols / 2;
+            var cy = image.Rows / 2;
+
+            var q0 = new Mat(image, new Rect(0, 0, cx, cy));
+            var q1 = new Mat(image, new Rect(cx, 0, cx, cy));
+            var q2 = new Mat(image, new Rect(0, cy, cx, cy));
+            var q3 = new Mat(image, new Rect(cx, cy, cx, cy));
+
+            var tmp = new Mat();
+
+            q0.CopyTo(tmp);
+            q3.CopyTo(q0);
+            tmp.CopyTo(q3);
+
+            q1.CopyTo(tmp);
+            q2.CopyTo(q1);
+            tmp.CopyTo(q2);
+            
+            planes[i] = image;
+        }
+        
+        Cv2.Merge(planes, image);
+        
+        return image;
+    }
+
+    public static Mat Idft(Mat image)
+    {
+        Mat result = new(image.Size(), MatType.CV_8U);
+        Cv2.Idft(image, result, DftFlags.RealOutput | DftFlags.Scale);
+        Cv2.Normalize(result, result, 0, 1, NormTypes.MinMax);
+        return result;
     }
     
     public static Mat Hist(Mat image)
