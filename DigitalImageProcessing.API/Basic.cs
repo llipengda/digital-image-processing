@@ -87,4 +87,12 @@ public static class Basic
         Cv2.CvtColor(image, gray, ColorConversionCodes.BGR2GRAY);
         return gray;
     }
+    
+    public static Mat ToBinary(Mat image, int threshold = 128)
+    {
+        image = ToGray(image);
+        Mat binary = new();
+        Cv2.Threshold(image, binary, threshold, 255, ThresholdTypes.Binary);
+        return binary;
+    }
 }

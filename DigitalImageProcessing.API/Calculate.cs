@@ -159,6 +159,11 @@ public static class Calculate
         return newImage;
     }
 
+    /// <summary>
+    /// 离散傅里叶变换
+    /// </summary>
+    /// <param name="image"></param>
+    /// <returns></returns>
     public static Mat Dft(Mat image)
     {
         var gray = Basic.ToGray(image);
@@ -185,7 +190,7 @@ public static class Calculate
     }
 
     /// <summary>
-    /// 离散傅里叶变换
+    /// 离散傅里叶变换 - 绘制图片的频谱
     /// </summary>
     /// <param name="image"></param>
     /// <returns></returns>
