@@ -81,7 +81,12 @@
                                     <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                             IsVisible="{Binding ResVisible}"
                                             Command="{Binding SaveToSrc1Command}">
-                                        <ic:SymbolIcon Symbol="ArrowCircleLeft" FontSize="15" />
+                                        <ic:SymbolIcon Symbol="ArrowReply" FontSize="15" />
+                                    </Button>
+                                    <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                            IsVisible="{Binding ResVisible}"
+                                            Command="{Binding SaveToSrc2Command}">
+                                        <ic:SymbolIcon Symbol="ArrowReplyDown" FontSize="15" />
                                     </Button>
                                     <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                             IsVisible="{Binding ResVisible}"

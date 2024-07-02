@@ -1,4 +1,5 @@
-﻿using Avalonia.Media.Imaging;
+﻿using System;
+using Avalonia.Media.Imaging;
 using OpenCvSharp;
 
 namespace DigitalImageProcessing.UI;

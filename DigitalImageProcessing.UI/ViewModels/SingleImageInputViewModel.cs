@@ -135,5 +135,10 @@ public partial class SingleImageInputViewModel : ViewModelBase
     partial void OnResChanged(Mat? value)
     {
         ResBmp = value?.ToBitmap();
+        ResChanged(value);
+    }
+    
+    protected virtual void ResChanged(Mat? value)
+    {
     }
 }

@@ -66,6 +66,10 @@ public static class Basic
 
     public static (Mat b, Mat g, Mat r) SplitChannels(Mat image)
     {
+        if (image.Channels() == 1)
+        {
+            Cv2.CvtColor(image, image, ColorConversionCodes.GRAY2BGR);
+        }
         var channels = Cv2.Split(image);
         return (channels[0], channels[1], channels[2]);
     }

@@ -7,6 +7,14 @@ public static class Calculate
     public static Mat Add(Mat a, Mat b)
     {
         b = b.Resize(a.Size());
+        if (a.Channels() == 1)
+        {
+            Cv2.CvtColor(a, a, ColorConversionCodes.GRAY2BGR);
+        }
+        if (b.Channels() == 1)
+        {
+            Cv2.CvtColor(b, b, ColorConversionCodes.GRAY2BGR);
+        }
         Mat result = new();
         Cv2.Add(a, b, result);
         return result;
@@ -15,6 +23,14 @@ public static class Calculate
     public static Mat Subtract(Mat a, Mat b)
     {
         b = b.Resize(a.Size());
+        if (a.Channels() == 1)
+        {
+            Cv2.CvtColor(a, a, ColorConversionCodes.GRAY2BGR);
+        }
+        if (b.Channels() == 1)
+        {
+            Cv2.CvtColor(b, b, ColorConversionCodes.GRAY2BGR);
+        }
         Mat result = new();
         Cv2.Subtract(a, b, result);
         return result;
@@ -23,6 +39,14 @@ public static class Calculate
     public static Mat Multiply(Mat a, Mat b)
     {
         b = b.Resize(a.Size());
+        if (a.Channels() == 1)
+        {
+            Cv2.CvtColor(a, a, ColorConversionCodes.GRAY2BGR);
+        }
+        if (b.Channels() == 1)
+        {
+            Cv2.CvtColor(b, b, ColorConversionCodes.GRAY2BGR);
+        }
         Mat result = new();
         Cv2.Multiply(a, b, result);
         return result;

@@ -81,6 +81,20 @@ public partial class TwoImagesInputViewModel : ViewModelBase
         ImageSingleton.Instance.Mat = Src1;
         ImageSingleton.Instance.Bmp = Src1Bmp;
     }
+    
+    [RelayCommand]
+    private void SaveToSrc2()
+    {
+        if (Res is null)
+        {
+            return;
+        }
+
+        Src2 = Res;
+
+        ImageSingleton.Instance.Mat2 = Src2;
+        ImageSingleton.Instance.Bmp2 = Src2Bmp;
+    }
 
     [RelayCommand]
     private async Task UploadSrc1()
@@ -192,6 +206,8 @@ public partial class TwoImagesInputViewModel : ViewModelBase
     private void Swap()
     {
         (Src1, Src2) = (Src2, Src1);
+        (ImageSingleton.Instance.Mat, ImageSingleton.Instance.Mat2) = (Src1, Src2);
+        (ImageSingleton.Instance.Bmp, ImageSingleton.Instance.Bmp2) = (Src1Bmp, Src2Bmp);
     }
 
     protected virtual void Src1Changed(Mat? value)
@@ -199,6 +215,10 @@ public partial class TwoImagesInputViewModel : ViewModelBase
     }
 
     protected virtual void Src2Changed(Mat? value)
+    {
+    }
+    
+    protected virtual void ResChanged(Mat? value)
     {
     }
 
@@ -217,5 +237,6 @@ public partial class TwoImagesInputViewModel : ViewModelBase
     partial void OnResChanged(Mat? value)
     {
         ResBmp = value?.ToBitmap();
+        ResChanged(value);
     }
 }
