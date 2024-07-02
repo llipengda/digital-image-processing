@@ -8,7 +8,8 @@ namespace DigitalImageProcessing.UI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty] private ViewModelBase _currentViewModel;
+    [ObservableProperty] 
+    private ViewModelBase _currentViewModel;
 
     public MainWindowViewModel()
     {

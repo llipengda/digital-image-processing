@@ -18,7 +18,8 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <ui:NavigationView Name="NavigationView" PaneDisplayMode="Left" AlwaysShowHeader="False" IsSettingsVisible="False">
+    <ui:NavigationView Name="NavigationView" 
+                       PaneDisplayMode="Left" AlwaysShowHeader="False" IsSettingsVisible="False">
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem Content="图像运算" IconSource="Calculator" Tag="Calculate">
                 <ui:NavigationViewItem.MenuItems>
@@ -92,6 +93,4 @@
             <ui:Frame Name="FrameView" Padding="20 15" Content="{Binding CurrentViewModel}" />
         </ui:NavigationView.Content>
     </ui:NavigationView>
-
-
 </wnd:AppWindow>
