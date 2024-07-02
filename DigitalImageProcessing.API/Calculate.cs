@@ -6,6 +6,7 @@ public static class Calculate
 {
     public static Mat Add(Mat a, Mat b)
     {
+        b = b.Resize(a.Size());
         Mat result = new();
         Cv2.Add(a, b, result);
         return result;
@@ -13,6 +14,7 @@ public static class Calculate
 
     public static Mat Subtract(Mat a, Mat b)
     {
+        b = b.Resize(a.Size());
         Mat result = new();
         Cv2.Subtract(a, b, result);
         return result;
@@ -20,6 +22,7 @@ public static class Calculate
 
     public static Mat Multiply(Mat a, Mat b)
     {
+        b = b.Resize(a.Size());
         Mat result = new();
         Cv2.Multiply(a, b, result);
         return result;

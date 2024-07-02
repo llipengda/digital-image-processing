@@ -24,4 +24,8 @@
         <PackageReference Include="FluentIcons.FluentAvalonia" Version="1.1.224" />
         <PackageReference Include="Material.Icons.Avalonia" Version="2.1.10" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DigitalImageProcessing.API\DigitalImageProcessing.API.csproj" />
+    </ItemGroup>
 </Project>

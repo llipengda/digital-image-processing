@@ -17,7 +17,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void NavigateTo(string tag)
+    private void NavigateTo(string tag)
     {
         var page = $"{Assembly.GetExecutingAssembly().GetName().Name}.ViewModels.{tag}ViewModel";
         var viewModel = Activator.CreateInstance(Type.GetType(page) ??

@@ -1,5 +1,4 @@
 using System;
-using Avalonia.Controls;
 using DigitalImageProcessing.UI.ViewModels;
 using FluentAvalonia.UI.Controls;
 using FluentAvalonia.UI.Windowing;
@@ -22,7 +21,7 @@ public partial class MainWindow : AppWindow
         if (e.SelectedItem is NavigationViewItem nvi)
         {
             var view = DataContext as MainWindowViewModel;
-            view?.NavigateTo(nvi.Tag?.ToString() ?? throw new InvalidOperationException("Tag not found"));
+            view?.NavigateToCommand.Execute(nvi.Tag?.ToString() ?? throw new InvalidOperationException("Tag not found"));
         }
     }
 }
