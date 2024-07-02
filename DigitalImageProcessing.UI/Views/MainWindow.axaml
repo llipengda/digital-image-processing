@@ -23,7 +23,7 @@
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem Content="图像运算" IconSource="Calculator" Tag="Calculate">
                 <ui:NavigationViewItem.MenuItems>
-                    <ui:NavigationViewItem Content="算数运算" Tag="CalculateArithmetic" />
+                    <ui:NavigationViewItem Content="算术运算" Tag="CalculateArithmetic" />
                     <ui:NavigationViewItem Content="色彩空间" Tag="CalculateColorSpace" />
                     <ui:NavigationViewItem Content="图像变换" Tag="CalculateTransform" />
                     <ui:NavigationViewItem Content="仿射变换" Tag="CalculateAffine" />

@@ -29,6 +29,9 @@
         <Style Selector="DropDownButton">
             <Setter Property="FontFamily" Value="{StaticResource MiSans}" />
         </Style>
+        <Style Selector="MenuItem">
+            <Setter Property="FontFamily" Value="{StaticResource MiSans}" />
+        </Style>
         <Style Selector="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource MiSans}" />
         </Style>
