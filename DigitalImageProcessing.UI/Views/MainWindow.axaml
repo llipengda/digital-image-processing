@@ -44,7 +44,7 @@
             <ui:NavigationViewItem Content="图像分割" IconSource="Cut" Tag="Segmentation">
                 <ui:NavigationViewItem.MenuItems>
                     <ui:NavigationViewItem Content="阈值化" Tag="SegmentationThreshold" />
-                    <ui:NavigationViewItem Content="线条变化监测" Tag="SegmentationLineChangeDetection" />
+                    <ui:NavigationViewItem Content="线条变化检测" Tag="SegmentationLineChangeDetection" />
                     <ui:NavigationViewItem Content="边缘检测" Tag="SegmentationEdgeDetection" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>

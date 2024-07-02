@@ -17,7 +17,7 @@ public static class Segmentation
         int threshold, int minLineLength = 200, int maxLineGap = 15)
     {
         Mat edges = new();
-        Cv2.GaussianBlur(image, image, new Size(3, 3), 0);
+        Cv2.GaussianBlur(image, image, new Size(1, 1), 0);
         Cv2.Canny(image, edges, 50, 150);
         if (algorithm == LineChangeDetectionAlgorithm.HoughLines)
         {
