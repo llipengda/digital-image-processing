@@ -13,34 +13,74 @@ namespace DigitalImageProcessing.UI.ViewModels;
 
 public partial class TwoImagesInputViewModel : ViewModelBase
 {
-    [ObservableProperty] 
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Src1Bmp))]
     [NotifyCanExecuteChangedFor(nameof(SwapCommand))]
+    [NotifyPropertyChangedFor(nameof(Src1Visible))]
     private Mat? _src1;
-    
-    [ObservableProperty] 
+
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Src2Bmp))]
     [NotifyCanExecuteChangedFor(nameof(SwapCommand))]
+    [NotifyPropertyChangedFor(nameof(Src2Visible))]
     private Mat? _src2;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ResBmp))]
     [NotifyCanExecuteChangedFor(nameof(SwapCommand))]
+    [NotifyPropertyChangedFor(nameof(ResVisible))]
     private Mat? _res;
 
-    public Bitmap? Src1Bmp => Src1?.ToBitmap();
-    
-    public Bitmap? Src2Bmp => Src2?.ToBitmap();
-    
-    public Bitmap? ResBmp => Res?.ToBitmap();
-    
-    [ObservableProperty] private bool _src1Visible;
-    
-    [ObservableProperty] private bool _src2Visible;
-    
-    [ObservableProperty] private bool _resVisible;
-    
+    [ObservableProperty] private Bitmap? _src1Bmp;
+
+    [ObservableProperty] private Bitmap? _src2Bmp;
+
+    [ObservableProperty] private Bitmap? _resBmp;
+
+    public bool Src1Visible => Src1 is not null;
+
+    public bool Src2Visible => Src2 is not null;
+
+    public bool ResVisible => Res is not null;
+
     public bool CanExecute() => Src1 != null && Src2 != null;
+
+    protected TwoImagesInputViewModel()
+    {
+        Src1Bmp = ImageSingleton.Instance.Bmp;
+        Src2Bmp = ImageSingleton.Instance.Bmp2;
+
+        Task.WhenAll([Func1(), Func2()]);
+        return;
+
+        async Task<Task> Func2()
+        {
+            await Task.Delay(10);
+            Src2 = ImageSingleton.Instance.Mat2;
+            return Task.CompletedTask;
+        }
+
+        async Task<Task> Func1()
+        {
+            await Task.Delay(10);
+            Src1 = ImageSingleton.Instance.Mat;
+            return Task.CompletedTask;
+        }
+    }
+
+    [RelayCommand]
+    private void SaveToSrc1()
+    {
+        if (Res is null)
+        {
+            return;
+        }
+
+        Src1 = Res;
+
+        ImageSingleton.Instance.Mat = Src1;
+        ImageSingleton.Instance.Bmp = Src1Bmp;
+    }
 
     [RelayCommand]
     private async Task UploadSrc1()
@@ -76,9 +116,11 @@ public partial class TwoImagesInputViewModel : ViewModelBase
         var image = API.Basic.ReadImage(file.Path);
 
         Src1 = image;
-        Src1Visible = true;
+
+        ImageSingleton.Instance.Mat = image;
+        ImageSingleton.Instance.Bmp = image.ToBitmap();
     }
-    
+
     [RelayCommand]
     private async Task UploadSrc2()
     {
@@ -113,7 +155,9 @@ public partial class TwoImagesInputViewModel : ViewModelBase
         var image = API.Basic.ReadImage(file.Path);
 
         Src2 = image;
-        Src2Visible = true;
+        
+        ImageSingleton.Instance.Mat2 = image;
+        ImageSingleton.Instance.Bmp2 = image.ToBitmap();
     }
 
     [RelayCommand]
@@ -125,36 +169,33 @@ public partial class TwoImagesInputViewModel : ViewModelBase
         var topLevel = TopLevel.GetTopLevel(lifetime.MainWindow) ??
                        throw new InvalidOperationException("TopLevel not found");
         var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
-            {
-                SuggestedFileName = "result.png",
-                FileTypeChoices =
-                [
-                    new FilePickerFileType("PNG")
-                    {
-                        Patterns = ["*.png"]
-                    }
-                ]
-            });
-        
+        {
+            SuggestedFileName = "result.png",
+            FileTypeChoices =
+            [
+                new FilePickerFileType("PNG")
+                {
+                    Patterns = ["*.png"]
+                }
+            ]
+        });
+
         if (file == null)
         {
             return;
         }
-        
+
         API.Basic.SaveImage(Res!, file.Path.AbsolutePath);
     }
-    
+
     [RelayCommand(CanExecute = nameof(CanExecute))]
     private void Swap()
     {
         (Src1, Src2) = (Src2, Src1);
-        
-        (Src1Visible, Src2Visible) = (Src2Visible, Src1Visible);
     }
 
     protected virtual void Src1Changed(Mat? value)
     {
-        
     }
 
     protected virtual void Src2Changed(Mat? value)
@@ -163,11 +204,18 @@ public partial class TwoImagesInputViewModel : ViewModelBase
 
     partial void OnSrc1Changed(Mat? value)
     {
+        Src1Bmp = value?.ToBitmap();
         Src1Changed(value);
     }
-    
+
     partial void OnSrc2Changed(Mat? value)
     {
+        Src2Bmp = value?.ToBitmap();
         Src2Changed(value);
+    }
+
+    partial void OnResChanged(Mat? value)
+    {
+        ResBmp = value?.ToBitmap();
     }
 }

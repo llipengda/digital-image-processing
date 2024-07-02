@@ -26,8 +26,6 @@ public partial class CalculateArithmeticViewModel : TwoImagesInputViewModel
             "乘法" => API.Calculate.Multiply(Src1, Src2),
             _ => throw new InvalidOperationException("CalcMode not found")
         };
-
-        ResVisible = true;
     }
 
     protected override void Src1Changed(Mat? value)

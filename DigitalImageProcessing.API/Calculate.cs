@@ -43,6 +43,24 @@ public static class Calculate
         return newImage;
     }
 
+    public static Mat ResizeAndCrop(Mat image, double scale)
+    {
+        var resized = Resize(image, scale);
+        Mat res;
+        res = new Mat(image.Size(), image.Type(), Scalar.Black);
+        var x = Math.Abs(res.Width - resized.Width) / 2;
+        var y = Math.Abs(res.Height - resized.Height) / 2;
+        if (resized.Width < image.Width)
+        {
+            resized.CopyTo(res[new Rect(x, y, resized.Width, resized.Height)]);
+        }
+        else
+        {
+            resized[new Rect(x, y, image.Width, image.Height)].CopyTo(res);
+        }
+        return res;
+    }
+
     public static Mat ResizeIf(Func<Mat, bool> gard, Mat image, (int width, int height) size)
     {
         return gard(image) ? Resize(image, size) : image;
@@ -213,6 +231,10 @@ public static class Calculate
         magI = DftShift(magI);
 
         Cv2.Normalize(magI, magI, 0, 1, NormTypes.MinMax);
+        
+        Cv2.Normalize(magI, magI, 0, 255, NormTypes.MinMax);
+
+        magI.ConvertTo(magI, MatType.CV_8U);
 
         return magI;
     }
@@ -221,7 +243,7 @@ public static class Calculate
     {
         var planes = image.Split();
 
-        for (var i = 0; i < 2; i++)
+        for (var i = 0; i < planes.Length; i++)
         {
             image = planes[i];
             
