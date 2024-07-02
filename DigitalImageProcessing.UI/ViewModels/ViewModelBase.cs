@@ -1,7 +1,7 @@
-﻿using ReactiveUI;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace DigitalImageProcessing.UI.ViewModels;
 
-public class ViewModelBase : ReactiveObject
+public class ViewModelBase : ObservableObject
 {
 }

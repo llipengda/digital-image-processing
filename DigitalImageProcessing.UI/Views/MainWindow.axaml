@@ -1,20 +1,97 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:DigitalImageProcessing.UI.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="DigitalImageProcessing.UI.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="DigitalImageProcessing.UI">
+<wnd:AppWindow xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:vm="using:DigitalImageProcessing.UI.ViewModels"
+               xmlns:ui="using:FluentAvalonia.UI.Controls"
+               xmlns:wnd="using:FluentAvalonia.UI.Windowing"
+               xmlns:ic="using:FluentIcons.FluentAvalonia"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+               x:Class="DigitalImageProcessing.UI.Views.MainWindow"
+               x:DataType="vm:MainWindowViewModel"
+               Icon="/Assets/avalonia-logo.ico"
+               Title="DigitalImageProcessing.UI">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <ui:NavigationView Name="NavigationView" PaneDisplayMode="Left" AlwaysShowHeader="False" IsSettingsVisible="False">
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItem Content="图像运算" IconSource="Calculator" Tag="Calculate">
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="算数运算" Tag="CalculateArithmetic" />
+                    <ui:NavigationViewItem Content="色彩空间" Tag="CalculateColorSpace" />
+                    <ui:NavigationViewItem Content="图像变换" Tag="CalculateTransform" />
+                    <ui:NavigationViewItem Content="仿射变换" Tag="CalculateAffine" />
+                    <ui:NavigationViewItem Content="离散傅里叶变换" Tag="CalculateDft" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="图像增强" Tag="Enhance">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="AddSquare" />
+                </ui:NavigationViewItem.IconSource>
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="线性变换" Tag="EnhanceLinear" />
+                    <ui:NavigationViewItem Content="对数变换" Tag="EnhanceLogarithm" />
+                    <ui:NavigationViewItem Content="直方图均衡化" Tag="EnhanceHistogramEqualization" />
+                    <ui:NavigationViewItem Content="直方图正规化" Tag="EnhanceHistogramNormalization" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="图像分割" IconSource="Cut" Tag="Segmentation">
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="阈值化" Tag="SegmentationThreshold" />
+                    <ui:NavigationViewItem Content="线条变化监测" Tag="SegmentationLineChangeDetection" />
+                    <ui:NavigationViewItem Content="边缘检测" Tag="SegmentationEdgeDetection" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="图像平滑" Tag="Smooth">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="Blur" />
+                </ui:NavigationViewItem.IconSource>
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="空域的平滑" Tag="SmoothSpatial" />
+                    <ui:NavigationViewItem Content="频域的平滑" Tag="SmoothFrequency" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="图像锐化" Tag="Sharpen">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="AddSubtractCircle" />
+                </ui:NavigationViewItem.IconSource>
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="空域的锐化" Tag="SharpenSpatial" />
+                    <ui:NavigationViewItem Content="频域的锐化" Tag="SharpenFrequency" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="形态学处理" Tag="Morphology">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="Cube" />
+                </ui:NavigationViewItem.IconSource>
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="腐蚀" Tag="MorphologyErode" />
+                    <ui:NavigationViewItem Content="膨胀" Tag="MorphologyDilate" />
+                    <ui:NavigationViewItem Content="开运算" Tag="MorphologyOpen" />
+                    <ui:NavigationViewItem Content="闭运算" Tag="MorphologyClose" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="图像复原" Tag="Restore">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="ArrowCounterclockwise" />
+                </ui:NavigationViewItem.IconSource>
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="噪声" Tag="RestoreNoise" />
+                    <ui:NavigationViewItem Content="均值类滤波器" Tag="RestoreMean" />
+                    <ui:NavigationViewItem Content="排序统计类滤波器" Tag="RestoreOrder" />
+                    <ui:NavigationViewItem Content="选择类滤波器" Tag="RestoreSelection" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.MenuItems>
+        <ui:NavigationView.Content>
+            <ui:Frame Name="FrameView" Padding="20 15" Content="{Binding CurrentViewModel}" />
+        </ui:NavigationView.Content>
+    </ui:NavigationView>
 
-</Window>
+
+</wnd:AppWindow>
