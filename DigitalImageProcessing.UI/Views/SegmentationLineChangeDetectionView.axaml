@@ -9,7 +9,7 @@
              x:Class="DigitalImageProcessing.UI.Views.SegmentationLineChangeDetectionView"
              x:DataType="vm:SegmentationLineChangeDetectionViewModel">
     <StackPanel>
-        <TextBlock FontSize="32" Margin="20 15">线性变换</TextBlock>
+        <TextBlock FontSize="32" Margin="20 15">线条变化检测</TextBlock>
         <Grid RowDefinitions="*, *" ColumnDefinitions="*, *">
             <Grid RowDefinitions="*" ColumnDefinitions="*" Width="400"
                   HorizontalAlignment="Center" VerticalAlignment="Center">

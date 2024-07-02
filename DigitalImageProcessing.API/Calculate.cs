@@ -302,8 +302,15 @@ public static class Calculate
     public static Mat Idft(Mat image)
     {
         Mat result = new(image.Size(), MatType.CV_8U);
+        
         Cv2.Idft(image, result, DftFlags.RealOutput | DftFlags.Scale);
+        
         Cv2.Normalize(result, result, 0, 1, NormTypes.MinMax);
+        
+        Cv2.Normalize(result, result, 0, 255, NormTypes.MinMax);
+        
+        Cv2.CvtColor(result, result, ColorConversionCodes.GRAY2BGR);
+        
         return result;
     }
     

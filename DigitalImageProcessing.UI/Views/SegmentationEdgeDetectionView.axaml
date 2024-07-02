@@ -9,7 +9,7 @@
              x:Class="DigitalImageProcessing.UI.Views.SegmentationEdgeDetectionView"
              x:DataType="vm:SegmentationEdgeDetectionViewModel">
     <StackPanel>
-        <TextBlock FontSize="32" Margin="20 15">阈值化</TextBlock>
+        <TextBlock FontSize="32" Margin="20 15">边缘检测</TextBlock>
         <Grid RowDefinitions="*, *" ColumnDefinitions="*, *">
             <Grid RowDefinitions="*" ColumnDefinitions="*" Width="400"
                   HorizontalAlignment="Center" VerticalAlignment="Center">
