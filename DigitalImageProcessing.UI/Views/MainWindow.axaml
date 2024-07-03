@@ -10,7 +10,7 @@
                x:Class="DigitalImageProcessing.UI.Views.MainWindow"
                x:DataType="vm:MainWindowViewModel"
                Icon="/Assets/avalonia-logo.ico"
-               Title="DigitalImageProcessing.UI">
+               Title="PixelForge">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -87,6 +87,12 @@
                     <ui:NavigationViewItem Content="排序统计类滤波器" Tag="RestoreOrder" />
                     <ui:NavigationViewItem Content="选择类滤波器" Tag="RestoreSelection" />
                 </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItemSeparator />
+            <ui:NavigationViewItem Content="文件扫描" Tag="Scan">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="Scan" />
+                </ui:NavigationViewItem.IconSource>
             </ui:NavigationViewItem>
         </ui:NavigationView.MenuItems>
         <ui:NavigationView.Content>

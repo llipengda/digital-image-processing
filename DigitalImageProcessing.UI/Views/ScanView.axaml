@@ -1,0 +1,58 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:DigitalImageProcessing.UI.ViewModels"
+             xmlns:ic="clr-namespace:FluentIcons.FluentAvalonia;assembly=FluentIcons.FluentAvalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DigitalImageProcessing.UI.Views.ScanView"
+             x:DataType="vm:ScanViewModel">
+    <Design.DataContext>
+        <vm:ScanViewModel />
+    </Design.DataContext>
+
+    <!-- <Grid> -->
+    <!-- <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" -->
+    <!--             IsVisible="{Binding !SrcVisible}"> -->
+
+    <!-- </StackPanel> -->
+    <!-- IsVisible="{Binding SrcVisible}" -->
+    <Canvas Name="Canvas"
+            ZIndex="1"
+            PointerPressed="Canvas_PointerPressed"
+            PointerMoved="Canvas_PointerMoved"
+            PointerReleased="Canvas_PointerReleased"
+            Background="Transparent">
+        <Button FontWeight="Normal" IsVisible="{Binding !SrcVisible}" Name="UploadButton1"
+                Canvas.Left="160" Canvas.Top="100"
+                Width="600" Height="400" Command="{Binding UploadSrcCommand}">
+            <StackPanel>
+                <ic:SymbolIcon Symbol="Add" FontSize="30" />
+                <TextBlock Margin="0 20 0 0">选择图片</TextBlock>
+            </StackPanel>
+        </Button>
+        <Image IsVisible="{Binding SrcVisible}"
+               Source="{Binding SrcBmp}"
+               Canvas.Left="160"
+               Canvas.Top="100"
+               Width="600" Height="400"
+               Stretch="Uniform" />
+        <Button Command="{Binding CalcCommand}" Width="80" Canvas.Left="340" Canvas.Top="550">运算</Button>
+        <Button Command="{Binding SaveResCommand}" Width="80" Canvas.Left="440" Canvas.Top="550">保存</Button>
+        <Button Command="{Binding UploadCommand}" Width="80" Canvas.Left="540" Canvas.Top="550">更换图片</Button>
+        <Polygon IsVisible="{Binding IsPointsVisible}" Points="{Binding PolygonPoints}" Stroke="Blue"
+                 StrokeThickness="2" />
+        <Ellipse IsVisible="{Binding IsPointsVisible}" Fill="Red" Width="10" Height="10"
+                 Canvas.Left="{Binding Points[0].X}"
+                 Canvas.Top="{Binding Points[0].Y}" />
+        <Ellipse IsVisible="{Binding IsPointsVisible}" Fill="Orange" Width="10" Height="10"
+                 Canvas.Left="{Binding Points[1].X}"
+                 Canvas.Top="{Binding Points[1].Y}" />
+        <Ellipse IsVisible="{Binding IsPointsVisible}" Fill="Blue" Width="10" Height="10"
+                 Canvas.Left="{Binding Points[2].X}"
+                 Canvas.Top="{Binding Points[2].Y}" />
+        <Ellipse IsVisible="{Binding IsPointsVisible}" Fill="Green" Width="10" Height="10"
+                 Canvas.Left="{Binding Points[3].X}"
+                 Canvas.Top="{Binding Points[3].Y}" />
+    </Canvas>
+</UserControl>
