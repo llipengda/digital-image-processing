@@ -129,7 +129,7 @@ public partial class SingleImageInputViewModel : ViewModelBase
     partial void OnSrcChanged(Mat? value)
     {
         SrcBmp = value?.ToBitmap();
-        SrcChanged(value);
+        Task.Run(() => SrcChanged(value));
     }
 
     partial void OnResChanged(Mat? value)

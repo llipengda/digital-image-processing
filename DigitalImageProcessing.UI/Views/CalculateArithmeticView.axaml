@@ -70,7 +70,7 @@
                                 <ic:SymbolIcon Symbol="Image" FontSize="40" />
                                 <TextBlock Margin="0 20 0 0" VerticalAlignment="Center"
                                            HorizontalAlignment="Center">
-                                    等待图片输入
+                                    等待结果...
                                 </TextBlock>
                             </StackPanel>
                             <Grid Width="360" Height="240" IsVisible="{Binding ResVisible}">
