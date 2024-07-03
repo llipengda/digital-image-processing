@@ -76,7 +76,7 @@
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="40 40 0 0" Spacing="10">
                 <StackPanel Orientation="Horizontal" Spacing="10">
                     <TextBlock VerticalAlignment="Center">算法</TextBlock>
-                    <DropDownButton Content="{Binding Algorithm}" VerticalAlignment="Center">
+                    <DropDownButton Content="{Binding Algorithm}"  VerticalAlignment="Center">
                         <DropDownButton.Flyout>
                             <MenuFlyout Placement="Bottom">
                                 <MenuItem Header="理想高通滤波" Command="{Binding DoSmoothSpatialCommand}" CommandParameter="理想高通滤波" />
