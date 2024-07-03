@@ -20,8 +20,12 @@ public partial class MainWindow : AppWindow
     {
         if (e.SelectedItem is NavigationViewItem nvi)
         {
+            if (nvi.Tag is null)
+            {
+                return;
+            }
             var view = DataContext as MainWindowViewModel;
-            view?.NavigateToCommand.Execute(nvi.Tag?.ToString() ?? throw new InvalidOperationException("Tag not found"));
+            view?.NavigateToCommand.Execute(nvi.Tag.ToString());
         }
     }
 }

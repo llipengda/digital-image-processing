@@ -9,11 +9,11 @@ namespace DigitalImageProcessing.UI.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty] 
-    private ViewModelBase _currentViewModel;
+    private ViewModelBase? _currentViewModel;
 
     public MainWindowViewModel()
     {
-        CurrentViewModel = new CalculateViewModel();
+        CurrentViewModel = null;
     }
 
     [RelayCommand]

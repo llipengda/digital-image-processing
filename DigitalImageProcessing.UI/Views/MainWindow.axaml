@@ -21,7 +21,7 @@
     <ui:NavigationView Name="NavigationView"
                        PaneDisplayMode="Left" AlwaysShowHeader="False" IsSettingsVisible="False">
         <ui:NavigationView.MenuItems>
-            <ui:NavigationViewItem Content="图像运算" IconSource="Calculator" Tag="Calculate">
+            <ui:NavigationViewItem Content="图像运算" IconSource="Calculator">
                 <ui:NavigationViewItem.MenuItems>
                     <ui:NavigationViewItem Content="算术运算" Tag="CalculateArithmetic" />
                     <ui:NavigationViewItem Content="色彩空间" Tag="CalculateColorSpace" />
@@ -30,7 +30,7 @@
                     <ui:NavigationViewItem Content="离散傅里叶变换" Tag="CalculateDft" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="图像增强" Tag="Enhance">
+            <ui:NavigationViewItem Content="图像增强">
                 <ui:NavigationViewItem.IconSource>
                     <ic:SymbolIconSource Symbol="AddSquare" />
                 </ui:NavigationViewItem.IconSource>
@@ -41,14 +41,14 @@
                     <ui:NavigationViewItem Content="直方图正规化" Tag="EnhanceHistogramNormalization" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="图像分割" IconSource="Cut" Tag="Segmentation">
+            <ui:NavigationViewItem Content="图像分割" IconSource="Cut">
                 <ui:NavigationViewItem.MenuItems>
                     <ui:NavigationViewItem Content="阈值化" Tag="SegmentationThreshold" />
                     <ui:NavigationViewItem Content="线条变化检测" Tag="SegmentationLineChangeDetection" />
                     <ui:NavigationViewItem Content="边缘检测" Tag="SegmentationEdgeDetection" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="图像平滑" Tag="Smooth">
+            <ui:NavigationViewItem Content="图像平滑">
                 <ui:NavigationViewItem.IconSource>
                     <ic:SymbolIconSource Symbol="Blur" />
                 </ui:NavigationViewItem.IconSource>
@@ -57,7 +57,7 @@
                     <ui:NavigationViewItem Content="频域的平滑" Tag="SmoothFrequency" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="图像锐化" Tag="Sharpen">
+            <ui:NavigationViewItem Content="图像锐化">
                 <ui:NavigationViewItem.IconSource>
                     <ic:SymbolIconSource Symbol="AddSubtractCircle" />
                 </ui:NavigationViewItem.IconSource>
@@ -66,7 +66,7 @@
                     <ui:NavigationViewItem Content="频域的锐化" Tag="SharpenFrequency" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="形态学处理" Tag="Morphology">
+            <ui:NavigationViewItem Content="形态学处理">
                 <ui:NavigationViewItem.IconSource>
                     <ic:SymbolIconSource Symbol="Cube" />
                 </ui:NavigationViewItem.IconSource>
@@ -77,7 +77,7 @@
                     <ui:NavigationViewItem Content="闭运算" Tag="MorphologyClose" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="图像复原" Tag="Restore">
+            <ui:NavigationViewItem Content="图像复原">
                 <ui:NavigationViewItem.IconSource>
                     <ic:SymbolIconSource Symbol="ArrowCounterclockwise" />
                 </ui:NavigationViewItem.IconSource>
