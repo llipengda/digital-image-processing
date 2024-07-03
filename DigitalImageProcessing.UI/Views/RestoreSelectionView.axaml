@@ -2,7 +2,97 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="DigitalImageProcessing.UI.Views.RestoreSelectionView">
-    RestoreSelection
+             xmlns:vm="clr-namespace:DigitalImageProcessing.UI.ViewModels"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:ic="using:FluentIcons.FluentAvalonia"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+             x:Class="DigitalImageProcessing.UI.Views.RestoreSelectionView"
+             x:DataType="vm:RestoreSelectionViewModel">
+    <StackPanel>
+        <TextBlock FontSize="32" Margin="20 15">选择类滤波器</TextBlock>
+        <Grid RowDefinitions="*, *" ColumnDefinitions="*, *">
+            <Grid RowDefinitions="*" ColumnDefinitions="*" Width="400"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                    <Button FontWeight="Normal" IsVisible="{Binding !SrcVisible}" Name="UploadButton1"
+                            Width="360" Height="240" Command="{Binding UploadSrcCommand}">
+                        <StackPanel>
+                            <ic:SymbolIcon Symbol="Add" FontSize="30" />
+                            <TextBlock Margin="0 20 0 0">选择图片</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Border IsVisible="{Binding SrcVisible}"
+                            BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                        <Grid>
+                            <Image IsVisible="{Binding SrcVisible}"
+                                   Source="{Binding SrcBmp}"
+                                   Width="360" Height="240" Stretch="Uniform" />
+                            <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                    Command="{Binding UploadSrcCommand}">
+                                <ic:SymbolIcon Symbol="ArrowCounterclockwise" FontSize="15" />
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <TextBlock TextAlignment="Center" Margin="0 5 0 0">源图像</TextBlock>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Margin="20">
+                    <Border
+                        BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                        <Panel Width="360" Height="240">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        IsVisible="{Binding !ResVisible}">
+                                <ic:SymbolIcon Symbol="Image" FontSize="40" />
+                                <TextBlock Margin="0 20 0 0" VerticalAlignment="Center"
+                                           HorizontalAlignment="Center">
+                                    等待图片输入
+                                </TextBlock>
+                            </StackPanel>
+                            <Grid Width="360" Height="240" IsVisible="{Binding ResVisible}">
+                                <Image IsVisible="{Binding ResVisible}"
+                                       Source="{Binding ResBmp}"
+                                       Width="360" Height="240" Stretch="Uniform" />
+                                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                    <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                            IsVisible="{Binding ResVisible}"
+                                            Command="{Binding SaveToSrcCommand}">
+                                        <ic:SymbolIcon Symbol="ArrowCircleLeft" FontSize="15" />
+                                    </Button>
+                                    <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                            IsVisible="{Binding ResVisible}"
+                                            Command="{Binding SaveResCommand}">
+                                        <ic:SymbolIcon Symbol="Save" FontSize="15" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Panel>
+                    </Border>
+                    <TextBlock TextAlignment="Center" Margin="0 5 20 0">结果</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="40 40 0 0" Spacing="10">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock VerticalAlignment="Center">类型</TextBlock>
+                    <DropDownButton Content="{Binding Type}" VerticalAlignment="Center">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuItem Header="大于" Command="{Binding DoCommand}"
+                                          CommandParameter="大于" />
+                                <MenuItem Header="小于" Command="{Binding DoCommand}"
+                                          CommandParameter="小于" />
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock VerticalAlignment="Center">值</TextBlock>
+                    <Slider Minimum="0" Maximum="255" Width="200" Value="{Binding Value}" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Value, StringFormat={}{0:0}}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
 </UserControl>
