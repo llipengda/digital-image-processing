@@ -23,9 +23,13 @@
 - 风格迁移 - 基于深度学习的图像风格迁移
 - 人脸卡通化 - 基于深度学习实现的人脸到卡通人脸的风格迁移
 
+## ⏯️ 演示视频
+
+[Google Dirve](https://drive.google.com/file/d/19tU9jXoZxBHSE7-9uW6MD7cL2-NhsDDA/view?usp=sharing) [百度网盘](https://pan.baidu.com/s/1yTKrVj61rEOWumtQmtDL7g?pwd=abcd)
+
 ## ⚒️ 使用
 
-从 [Google Dirve]() 或 [百度网盘](https://pan.baidu.com/s/1X0ebM0nIywbI6FeHpsMi0g?pwd=pypy) 下载软件
+从 [Google Dirve](https://drive.google.com/file/d/1izRDRcjr0Lj_qmhKysWn1RM7nx7tDRp_/view?usp=sharing) 或 [百度网盘](https://pan.baidu.com/s/1X0ebM0nIywbI6FeHpsMi0g?pwd=pypy) 下载软件
 
 **或者**，先编译 `DigitalImageProcessing.UI`，然后下载所需深度学习模型（[Google Dirve]() 或 [百度网盘]()），解压到同级目录下
 
