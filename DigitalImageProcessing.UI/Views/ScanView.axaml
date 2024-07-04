@@ -33,7 +33,7 @@
                Stretch="Uniform" />
         <TextBlock FontSize="32" Canvas.Left="20" Canvas.Top="15">文档扫描</TextBlock>
         <TextBlock IsVisible="{Binding Loading}" FontSize="24" Canvas.Left="40" Canvas.Top="280">运算中...</TextBlock>
-        <Button Command="{Binding CalcCommand}" Width="80" Canvas.Left="340" Canvas.Top="550">运算</Button>
+        <Button IsEnabled="{Binding !Loading}" Command="{Binding CalcCommand}" Width="80" Canvas.Left="340" Canvas.Top="550">运算</Button>
         <Button Command="{Binding SaveResCommand}" Width="80" Canvas.Left="440" Canvas.Top="550">保存</Button>
         <Button Command="{Binding UploadCommand}" Width="80" Canvas.Left="540" Canvas.Top="550">更换图片</Button>
         <Polygon IsVisible="{Binding IsPointsVisible}" Points="{Binding PolygonPoints}" Stroke="Blue"

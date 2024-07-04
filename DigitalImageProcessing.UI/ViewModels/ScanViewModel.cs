@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DigitalImageProcessing.API;
@@ -11,9 +13,8 @@ namespace DigitalImageProcessing.UI.ViewModels;
 
 public partial class ScanViewModel : SingleImageInputViewModel
 {
-    [ObservableProperty]
-    private bool _loading;
-    
+    [ObservableProperty] private bool _loading;
+
     public ScanViewModel()
     {
         _points =
@@ -72,34 +73,65 @@ public partial class ScanViewModel : SingleImageInputViewModel
 
     [ObservableProperty] private bool _isPointsVisible;
 
+    private volatile bool _isCanceled;
+
+    private volatile bool _isRunning;
+
     protected override void SrcChanged(Mat? value)
     {
         if (_scan is null)
         {
-            Loading = true;
-            IsPointsVisible = false;
-            _scan = new(Src!);
-            var width = _scan.OriginalImage.Width;
-            var height = _scan.OriginalImage.Height;
-            var scaleW = 600.0 / width;
-            var scaleH = 400.0 / height;
-            var scale = Math.Min(scaleW, scaleH);
-            _scale = scale;
-            var dx = 160 + 300 - width * scale / 2 - 5;
-            var dy = 100 + 200 - height * scale / 2 - 5;
-            _dx = dx;
-            _dy = dy;
-
-            Console.WriteLine(_scan.Points.Count);
+            while (_isRunning)
+            {
+                _isCanceled = true;
+            }
             
-            Points = new(_scan.Points.Select(p => new Point(p.X * scale + dx, p.Y * scale + dy)).ToList());
-            PolygonPoints = new(Points.Select(p => new Point(p.X + 5, p.Y + 5)).ToList());
-            Src = _scan.Image;
-            IsPointsVisible = true;
-            Loading = false;
+            _isCanceled = false;
+
+            Task.Run(Detect);
         }
 
         base.SrcChanged(value);
+    }
+
+    private void Detect()
+    {
+        _isRunning = true;
+        Loading = true;
+        IsPointsVisible = false;
+        _scan = new(Src!);
+        var width = _scan.OriginalImage.Width;
+        var height = _scan.OriginalImage.Height;
+        var scaleW = 600.0 / width;
+        var scaleH = 400.0 / height;
+        var scale = Math.Min(scaleW, scaleH);
+        _scale = scale;
+        var dx = 160 + 300 - width * scale / 2 - 5;
+        var dy = 100 + 200 - height * scale / 2 - 5;
+        _dx = dx;
+        _dy = dy;
+
+        if (_isCanceled)
+        {
+            _isRunning = false;
+            return;
+        }
+
+        Points = new(_scan.Points.Select(p => new Point(p.X * scale + dx, p.Y * scale + dy)).ToList());
+
+        PolygonPoints = new(Points.Select(p => new Point(p.X + 5, p.Y + 5)).ToList());
+
+        if (_isCanceled)
+        {
+            _isRunning = false;
+            return;
+        }
+
+        Src = _scan.Image;
+        IsPointsVisible = true;
+        Loading = false;
+
+        _isRunning = false;
     }
 
     [RelayCommand]
@@ -114,7 +146,7 @@ public partial class ScanViewModel : SingleImageInputViewModel
             .ToArray());
         Src = _scan.Image;
         Res = _scan.Image;
-        
+
         IsPointsVisible = false;
     }
 
@@ -122,7 +154,7 @@ public partial class ScanViewModel : SingleImageInputViewModel
     private void Upload()
     {
         _scan = null;
-        
+
         UploadSrcCommand.Execute(null);
     }
 }
