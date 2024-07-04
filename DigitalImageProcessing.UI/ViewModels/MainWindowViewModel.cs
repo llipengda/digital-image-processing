@@ -13,7 +13,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        CurrentViewModel = null;
+        CurrentViewModel = new WelcomeViewModel();
     }
 
     [RelayCommand]

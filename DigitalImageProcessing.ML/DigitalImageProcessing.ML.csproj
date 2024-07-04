@@ -16,4 +16,9 @@
         </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="cartoon\" />
+      <Folder Include="PySrc\cartoon\" />
+    </ItemGroup>
+
 </Project>

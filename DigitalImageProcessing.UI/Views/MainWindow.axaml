@@ -9,7 +9,9 @@
                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
                x:Class="DigitalImageProcessing.UI.Views.MainWindow"
                x:DataType="vm:MainWindowViewModel"
-               Icon="/Assets/avalonia-logo.ico"
+               MinHeight="660"
+               MinWidth="1200"
+               Icon="/Assets/icon.ico"
                Title="PixelForge">
 
     <Design.DataContext>

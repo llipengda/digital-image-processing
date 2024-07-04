@@ -4,20 +4,20 @@ namespace DigitalImageProcessing.API;
 
 public class Scan
 {
-    public Mat OriginalImage { get; set; }
+    public Mat OriginalImage { get; }
 
-    public List<Point> Points { get; set; } = new();
+    public List<Point> Points { get; private set; } = new();
 
-    public decimal Scale { get; set; }
+    private decimal Scale { get; set; }
 
-    public Mat Image { get; set; }
+    public Mat Image { get; private set; }
 
-    public Point[][]? Corners { get; set; }
+    private Point[][]? Corners { get; set; }
 
     public Scan(Mat image)
     {
         OriginalImage = Image = image;
-
+        
         Resize();
 
         Close();
@@ -31,7 +31,7 @@ public class Scan
         GetCorners();
     }
 
-    public void Resize()
+    private void Resize()
     {
         var max = 1080;
 
@@ -46,12 +46,13 @@ public class Scan
         else
         {
             res = Image;
+            Scale = 1;
         }
 
         Image = res;
     }
 
-    public void Close(int iter = 8)
+    private void Close(int iter = 8)
     {
         var kernel = Cv2.GetStructuringElement(MorphShapes.Rect, new Size(5, 5));
 
@@ -62,7 +63,7 @@ public class Scan
         Image = res;
     }
 
-    public void GrabCut(int iter = 10)
+    private void GrabCut(int iter = 10)
     {
         if (Image.Channels() == 1)
         {
@@ -97,7 +98,7 @@ public class Scan
         Image = res;
     }
 
-    public void EdgeDetection()
+    private void EdgeDetection()
     {
         var gray = Basic.ToGray(Image);
         Cv2.GaussianBlur(gray, gray, new Size(11, 11), 0);
@@ -111,7 +112,7 @@ public class Scan
         Image = canny;
     }
 
-    public void CalcContours()
+    private void CalcContours()
     {
         Cv2.FindContours(Image, out var contours, out _,
             RetrievalModes.External, ContourApproximationModes.ApproxSimple);
@@ -134,7 +135,7 @@ public class Scan
         Corners = [..contours, ..contours2];
     }
 
-    public void GetCorners()
+    private void GetCorners()
     {
         var corners = new List<List<Point>>();
 
@@ -144,7 +145,7 @@ public class Scan
         {
             var approx = Cv2.ApproxPolyDP(contour, Cv2.ArcLength(contour, true) * 0.02, true);
 
-            if (approx.Length is 4 && Cv2.ContourArea(approx) > 2000)
+            if (approx.Length is 4 && Cv2.ContourArea(approx) > Image.Width / 4.0 * Image.Height / 4.0)
             {
                 var center = new Point(approx.Sum(p => p.X) / approx.Length, approx.Sum(p => p.Y) / approx.Length);
 
@@ -153,7 +154,7 @@ public class Scan
                 corners.Add(approx.ToList());
             }
         }
-
+        
         if (corners.Count == 0)
         {
             foreach (var contour in Corners)
@@ -223,7 +224,8 @@ public class Scan
             ]);
         }
 
-        var ps = corners.MaxBy(c => Cv2.ContourArea(c))!.Select(p => new Point((int)(p.X / Scale), (int)(p.Y / Scale)))
+        var ps = corners.MaxBy(c => Cv2.ContourArea(c))!
+            .Select(p => new Point((int)(p.X / Scale), (int)(p.Y / Scale)))
             .ToList();
 
         var higher = ps.OrderBy(p => p.Y).Take(2).ToList();
@@ -234,7 +236,7 @@ public class Scan
         var ll = lower.MinBy(p => p.X);
 
         Points = [hl, hr, lr, ll];
-
+        
         Cv2.DrawContours(res, [Points], -1, Scalar.White, 3);
 
         Image = res;

@@ -11,9 +11,18 @@ namespace DigitalImageProcessing.UI.ViewModels;
 
 public partial class ScanViewModel : SingleImageInputViewModel
 {
+    [ObservableProperty]
+    private bool _loading;
+    
     public ScanViewModel()
     {
-        _points = new();
+        _points =
+        [
+            new Point(0, 0),
+            new Point(0, 0),
+            new Point(0, 0),
+            new Point(0, 0)
+        ];
         PolygonPoints = new(Points.Select(p => new Point(p.X + 5, p.Y + 5)).ToList());
     }
 
@@ -67,6 +76,7 @@ public partial class ScanViewModel : SingleImageInputViewModel
     {
         if (_scan is null)
         {
+            Loading = true;
             IsPointsVisible = false;
             _scan = new(Src!);
             var width = _scan.OriginalImage.Width;
@@ -79,11 +89,14 @@ public partial class ScanViewModel : SingleImageInputViewModel
             var dy = 100 + 200 - height * scale / 2 - 5;
             _dx = dx;
             _dy = dy;
-            Console.WriteLine(scale);
+
+            Console.WriteLine(_scan.Points.Count);
+            
             Points = new(_scan.Points.Select(p => new Point(p.X * scale + dx, p.Y * scale + dy)).ToList());
             PolygonPoints = new(Points.Select(p => new Point(p.X + 5, p.Y + 5)).ToList());
             Src = _scan.Image;
             IsPointsVisible = true;
+            Loading = false;
         }
 
         base.SrcChanged(value);
