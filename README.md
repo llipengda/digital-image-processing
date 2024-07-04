@@ -25,7 +25,7 @@
 
 ## ⏯️ 演示视频
 
-[Google Dirve](https://drive.google.com/file/d/19tU9jXoZxBHSE7-9uW6MD7cL2-NhsDDA/view?usp=sharing) [百度网盘](https://pan.baidu.com/s/1yTKrVj61rEOWumtQmtDL7g?pwd=abcd)
+[Google Dirve](https://drive.google.com/file/d/19tU9jXoZxBHSE7-9uW6MD7cL2-NhsDDA/view?usp=sharing) 或 [百度网盘](https://pan.baidu.com/s/1yTKrVj61rEOWumtQmtDL7g?pwd=abcd)
 
 ## ⚒️ 使用
 
