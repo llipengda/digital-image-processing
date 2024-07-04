@@ -31,7 +31,7 @@
 
 从 [Google Dirve](https://drive.google.com/file/d/1izRDRcjr0Lj_qmhKysWn1RM7nx7tDRp_/view?usp=sharing) 或 [百度网盘](https://pan.baidu.com/s/1X0ebM0nIywbI6FeHpsMi0g?pwd=pypy) 下载软件
 
-**或者**，先编译 `DigitalImageProcessing.UI`，然后下载所需深度学习模型（[Google Dirve]() 或 [百度网盘]()），解压到同级目录下
+**或者**，先编译 `DigitalImageProcessing.UI`，然后下载所需深度学习模型（[Google Dirve]() 或 [百度网盘](https://pan.baidu.com/s/1xBWbdCRas2tkcrzyxoQ2Wg?pwd=abcd)），解压到同级目录下
 
 ## ⚓ 库 & 框架
 
