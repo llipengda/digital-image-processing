@@ -4,6 +4,8 @@
 
 ![image](https://github.com/llipengda/digital-image-processing/assets/113117524/b90e7ebd-32cf-4014-aec9-aa429b0c77ca)
 
+![image](https://github.com/llipengda/digital-image-processing/assets/113117524/30b61555-2cc6-468f-837e-b2584ebb87b0)
+
 ![image](https://github.com/llipengda/digital-image-processing/assets/113117524/a1d0bcfd-9fac-4001-953b-9a63ed11c454)
 
 ## 📁 项目结构
@@ -23,7 +25,7 @@
 
 ## ⚒️ 使用
 
-从 [Google Dirve]() 或 [百度网盘]() 下载软件
+从 [Google Dirve]() 或 [百度网盘](https://pan.baidu.com/s/1X0ebM0nIywbI6FeHpsMi0g?pwd=pypy) 下载软件
 
 **或者**，先编译 `DigitalImageProcessing.UI`，然后下载所需深度学习模型（[Google Dirve]() 或 [百度网盘]()），解压到同级目录下
 
