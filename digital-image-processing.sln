@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalImageProcessing.UI",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalImageProcessing.API", "DigitalImageProcessing.API\DigitalImageProcessing.API.csproj", "{07669854-5ADF-4600-A2FE-D139A0223643}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalImageProcessing.ML", "DigitalImageProcessing.ML\DigitalImageProcessing.ML.csproj", "{A255C656-BD96-4719-92B0-C895B94CE5B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{07669854-5ADF-4600-A2FE-D139A0223643}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07669854-5ADF-4600-A2FE-D139A0223643}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07669854-5ADF-4600-A2FE-D139A0223643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A255C656-BD96-4719-92B0-C895B94CE5B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A255C656-BD96-4719-92B0-C895B94CE5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A255C656-BD96-4719-92B0-C895B94CE5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A255C656-BD96-4719-92B0-C895B94CE5B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

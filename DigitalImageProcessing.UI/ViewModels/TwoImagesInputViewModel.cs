@@ -225,18 +225,18 @@ public partial class TwoImagesInputViewModel : ViewModelBase
     partial void OnSrc1Changed(Mat? value)
     {
         Src1Bmp = value?.ToBitmap();
-        Src1Changed(value);
+        Task.Run(() => Src1Changed(value));
     }
 
     partial void OnSrc2Changed(Mat? value)
     {
         Src2Bmp = value?.ToBitmap();
-        Src2Changed(value);
+        Task.Run(() => Src2Changed(value));
     }
 
     partial void OnResChanged(Mat? value)
     {
         ResBmp = value?.ToBitmap();
-        ResChanged(value);
+        Task.Run(() => ResChanged(value));
     }
 }

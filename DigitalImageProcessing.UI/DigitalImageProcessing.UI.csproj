@@ -27,5 +27,17 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DigitalImageProcessing.API\DigitalImageProcessing.API.csproj" />
+      <ProjectReference Include="..\DigitalImageProcessing.ML\DigitalImageProcessing.ML.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\StyleTransferView.axaml.cs">
+        <DependentUpon>StyleTransferView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\CartoonView.axaml.cs">
+        <DependentUpon>CartoonView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

@@ -89,9 +89,20 @@
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
             <ui:NavigationViewItemSeparator />
-            <ui:NavigationViewItem Content="文件扫描" Tag="Scan">
+            <ui:NavigationViewItem Content="文档扫描" Tag="Scan">
                 <ui:NavigationViewItem.IconSource>
                     <ic:SymbolIconSource Symbol="Scan" />
+                </ui:NavigationViewItem.IconSource>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItemSeparator />
+            <ui:NavigationViewItem Content="风格迁移" Tag="StyleTransfer">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="PaintBrush" />
+                </ui:NavigationViewItem.IconSource>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="人脸卡通化" Tag="Cartoon">
+                <ui:NavigationViewItem.IconSource>
+                    <ic:SymbolIconSource Symbol="Emoji" />
                 </ui:NavigationViewItem.IconSource>
             </ui:NavigationViewItem>
         </ui:NavigationView.MenuItems>

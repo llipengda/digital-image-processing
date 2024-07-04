@@ -98,7 +98,7 @@
                                 </Grid>
                             </Panel>
                         </Border>
-                        <TextBlock TextAlignment="Center" Margin="0 5 20 0">结果</TextBlock>
+                        <TextBlock TextAlignment="Center" Margin="0 5 0 0">结果</TextBlock>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">

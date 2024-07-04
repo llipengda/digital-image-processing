@@ -6,11 +6,11 @@
              xmlns:ui="using:FluentAvalonia.UI.Controls"
              xmlns:ic="using:FluentIcons.FluentAvalonia"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
-             x:Class="DigitalImageProcessing.UI.Views.RestoreSelectionView"
-             x:DataType="vm:RestoreSelectionViewModel">
+             x:Class="DigitalImageProcessing.UI.Views.CartoonView"
+             x:DataType="vm:CartoonViewModel">
     <StackPanel>
-        <TextBlock FontSize="32" Margin="20 15">选择类滤波器</TextBlock>
-        <Grid RowDefinitions="*, *" ColumnDefinitions="*, *">
+        <TextBlock FontSize="32" Margin="20 15">人脸卡通化</TextBlock>
+        <Grid RowDefinitions="*" ColumnDefinitions="*, *">
             <Grid RowDefinitions="*" ColumnDefinitions="*" Width="400"
                   HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
@@ -36,7 +36,7 @@
                     <TextBlock TextAlignment="Center" Margin="0 5 0 0">源图像</TextBlock>
                 </StackPanel>
             </Grid>
-            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
                             Margin="20">
                     <Border
@@ -54,8 +54,7 @@
                                 <Image IsVisible="{Binding ResVisible}"
                                        Source="{Binding ResBmp}"
                                        Width="360" Height="240" Stretch="Uniform" />
-                                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                                            Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
                                     <Button ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                             IsVisible="{Binding ResVisible}"
                                             Command="{Binding SaveToSrcCommand}">
@@ -71,26 +70,8 @@
                         </Panel>
                     </Border>
                     <TextBlock TextAlignment="Center" Margin="0 5 0 0">结果</TextBlock>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="40 40 0 0" Spacing="10">
-                <StackPanel Orientation="Horizontal" Spacing="10">
-                    <TextBlock VerticalAlignment="Center">类型</TextBlock>
-                    <DropDownButton Content="{Binding Type}" VerticalAlignment="Center">
-                        <DropDownButton.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <MenuItem Header="大于" Command="{Binding DoCommand}"
-                                          CommandParameter="大于" />
-                                <MenuItem Header="小于" Command="{Binding DoCommand}"
-                                          CommandParameter="小于" />
-                            </MenuFlyout>
-                        </DropDownButton.Flyout>
-                    </DropDownButton>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Spacing="10">
-                    <TextBlock VerticalAlignment="Center">值</TextBlock>
-                    <Slider Minimum="0" Maximum="255" Width="200" Value="{Binding Value}" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding Value, StringFormat={}{0:0}}" />
+                    <TextBlock FontSize="24" IsVisible="{Binding Loading}" TextAlignment="Center" Margin="0 10 0 0">运算中...</TextBlock>
+                    <TextBlock FontSize="24" IsVisible="{Binding !Success}" TextAlignment="Center" Margin="0 10 0 0">未检测到人脸</TextBlock>
                 </StackPanel>
             </StackPanel>
         </Grid>
